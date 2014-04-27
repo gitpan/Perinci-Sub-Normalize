@@ -1,0 +1,51 @@
+NAME
+    Perinci::Sub::Normalize - Normalize Rinci metadata
+
+VERSION
+    This document describes version 0.01 of module Perinci::Sub::Normalize
+    (in distribution Perinci-Sub-Normalize), released on 2014-04-28.
+
+SYNOPSIS
+     use Perinci::Sub::Normalize qw(normalize_function_metadata);
+
+     my $nmeta = normalize_function_metadata($meta);
+
+FUNCTIONS
+  normalize_function_metadata($meta, \%opts) => HASH
+    Normalize and check Rinci function metadata $meta. Return normalized
+    metadata, which is a shallow copy of $meta. Die on error.
+
+    Available options:
+
+    *   allow_unknown_properties => BOOL (default: 0)
+
+    *   normalize_sah_schemas => BOOL (default: 1)
+
+SEE ALSO
+    Rinci::function
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Perinci-Sub-Normalize>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/sharyanto/perl-Perinci-Sub-Normalize>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-Normalize
+    >
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    Steven Haryanto <stevenharyanto@gmail.com>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Steven Haryanto.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+

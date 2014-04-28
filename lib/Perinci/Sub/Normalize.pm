@@ -16,7 +16,7 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 our $DATE = '2014-04-28'; # DATE
 
 sub _normalize{
@@ -24,13 +24,27 @@ sub _normalize{
 
     my $opt_aup = $opts->{allow_unknown_properties};
     my $opt_nss = $opts->{normalize_sah_schemas};
-    my $opt_rip = $opts->{_remove_internal_properties};
+    my $opt_rip = $opts->{remove_internal_properties};
 
+  KEY:
     for my $k (keys %$meta) {
-        next if $k =~ /\./; # ignore attrs for now
+
+        if ($k =~ /\.(\w+)\z/) {
+            my $attr = $1;
+            unless ($attr =~ /\A_/ && $opt_rip) {
+                $nmeta->{$k} = $meta->{$k};
+            }
+            next KEY;
+        }
+
         my $prop = $k;
-        next if $opt_rip && $prop =~ /\A_/;
         my $prop_proplist = $proplist->{$prop};
+        if ($prop =~ /\A_/) {
+            unless ($opt_rip) {
+                $nmeta->{$prop} = $meta->{$k};
+            }
+            next KEY;
+        }
         die "Unknown property '$prefix/$prop'"
             if !$opt_aup && !$prop_proplist;
         if ($prop_proplist && $prop_proplist->{_prop}) {
@@ -105,7 +119,7 @@ sub normalize_function_metadata {
 
     $opts->{allow_unknown_properties}    //= 0;
     $opts->{normalize_sah_schemas}       //= 1;
-    $opts->{_remove_internal_properties} //= 0;
+    $opts->{remove_internal_properties}  //= 0;
 
     _normalize($meta, $opts, $sch_proplist, {}, '');
 }
@@ -125,7 +139,7 @@ Perinci::Sub::Normalize - Normalize Rinci metadata
 
 =head1 VERSION
 
-This document describes version 0.01 of module Perinci::Sub::Normalize (in distribution Perinci-Sub-Normalize), released on 2014-04-28.
+This document describes version 0.02 of module Perinci::Sub::Normalize (in distribution Perinci-Sub-Normalize), released on 2014-04-28.
 
 =head1 SYNOPSIS
 
@@ -146,7 +160,19 @@ Available options:
 
 =item * allow_unknown_properties => BOOL (default: 0)
 
+If set to true, will die if there are unknown properties.
+
 =item * normalize_sah_schemas => BOOL (default: 1)
+
+By default, L<Sah> schemas e.g. in C<result/schema> or C<args/*/schema> property
+is normalized using L<Data::Sah>'s C<normalize_schema>. Set this to 0 if you
+don't want this.
+
+=item * remove_internal_properties => BOOL (default: 0)
+
+If set to 1, all properties and attributes starting with underscore (C<_>) with
+will be stripped. According to L<DefHash> specification, they are ignored and
+usually contain notes/comments/extra information.
 
 =back
 

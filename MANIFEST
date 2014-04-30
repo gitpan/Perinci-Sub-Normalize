@@ -10,6 +10,7 @@ dist.ini
 lib/Perinci/Sub/Normalize.pm
 t/00-compile.t
 t/01-basics.t
+t/load-perisprop-module.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
 t/release-rinci.t

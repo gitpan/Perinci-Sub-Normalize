@@ -16,8 +16,8 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.02'; # VERSION
-our $DATE = '2014-04-28'; # DATE
+our $VERSION = '0.03'; # VERSION
+our $DATE = '2014-04-30'; # DATE
 
 sub _normalize{
     my ($meta, $opts, $proplist, $nmeta, $prefix) = @_;
@@ -45,8 +45,16 @@ sub _normalize{
             }
             next KEY;
         }
-        die "Unknown property '$prefix/$prop'"
-            if !$opt_aup && !$prop_proplist;
+        # try to load module that declare new props first
+        if (!$opt_aup && !$prop_proplist) {
+            if ($prop =~ /\A[A-Za-z][A-Za-z0-9_]*\z/) {
+                my $mod = "Perinci/Sub/Property$prefix/$prop.pm";
+                require $mod;
+                $prop_proplist = $proplist->{$prop};
+            }
+            die "Unknown property '$prefix/$prop'"
+                unless $prop_proplist;
+        }
         if ($prop_proplist && $prop_proplist->{_prop}) {
             die "Property '$prefix/$prop' must be a hash"
                 unless ref($meta->{$k}) eq 'HASH';
@@ -139,7 +147,7 @@ Perinci::Sub::Normalize - Normalize Rinci metadata
 
 =head1 VERSION
 
-This document describes version 0.02 of module Perinci::Sub::Normalize (in distribution Perinci-Sub-Normalize), released on 2014-04-28.
+This document describes version 0.03 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-04-30.
 
 =head1 SYNOPSIS
 

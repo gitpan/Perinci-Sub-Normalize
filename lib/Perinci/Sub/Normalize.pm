@@ -16,7 +16,7 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.03'; # VERSION
+our $VERSION = '0.04'; # VERSION
 our $DATE = '2014-04-30'; # DATE
 
 sub _normalize{
@@ -49,7 +49,12 @@ sub _normalize{
         if (!$opt_aup && !$prop_proplist) {
             if ($prop =~ /\A[A-Za-z][A-Za-z0-9_]*\z/) {
                 my $mod = "Perinci/Sub/Property$prefix/$prop.pm";
-                require $mod;
+                eval { require $mod };
+                # hide technical error message from require()
+                if ($@) {
+                    die "Unknown property '$prefix/$prop' (and couldn't ".
+                        "load property module)" if $@;
+                }
                 $prop_proplist = $proplist->{$prop};
             }
             die "Unknown property '$prefix/$prop'"
@@ -147,7 +152,7 @@ Perinci::Sub::Normalize - Normalize Rinci metadata
 
 =head1 VERSION
 
-This document describes version 0.03 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-04-30.
+This document describes version 0.04 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-04-30.
 
 =head1 SYNOPSIS
 

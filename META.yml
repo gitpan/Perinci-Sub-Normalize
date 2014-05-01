@@ -1,5 +1,5 @@
 ---
-abstract: 'Normalize Rinci metadata'
+abstract: 'Normalize Rinci function metadata'
 author:
   - 'Steven Haryanto <stevenharyanto@gmail.com>'
 build_requires:
@@ -11,7 +11,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: '6.30'
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 5.015, CPAN::Meta::Converter version 2.140640'
+generated_by: 'Dist::Zilla version 5.013, CPAN::Meta::Converter version 2.133380'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -19,77 +19,74 @@ meta-spec:
 name: Perinci-Sub-Normalize
 requires:
   Data::Sah: '0'
-  Rinci: v1.1.44
+  Rinci: v1.1.46
   Sah::Schema::Rinci: v1.1.44
   perl: '5.010001'
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-Normalize
   homepage: https://metacpan.org/release/Perinci-Sub-Normalize
   repository: git://github.com/sharyanto/perl-Perinci-Sub-Normalize.git
-version: '0.04'
+version: '0.05'
 x_Dist_Zilla:
   perl:
-    version: '5.018001'
+    version: '5.018002'
   plugins:
     -
       class: Dist::Zilla::Plugin::GatherDir
       name: '@Author::SHARYANTO/@Filter/GatherDir'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::PruneCruft
       name: '@Author::SHARYANTO/@Filter/PruneCruft'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ManifestSkip
       name: '@Author::SHARYANTO/@Filter/ManifestSkip'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::MetaYAML
       name: '@Author::SHARYANTO/@Filter/MetaYAML'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::License
       name: '@Author::SHARYANTO/@Filter/License'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::PodCoverageTests
       name: '@Author::SHARYANTO/@Filter/PodCoverageTests'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::PodSyntaxTests
       name: '@Author::SHARYANTO/@Filter/PodSyntaxTests'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ExtraTests
       name: '@Author::SHARYANTO/@Filter/ExtraTests'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ExecDir
       name: '@Author::SHARYANTO/@Filter/ExecDir'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ShareDir
       name: '@Author::SHARYANTO/@Filter/ShareDir'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::MakeMaker
-      config:
-        Dist::Zilla::Role::TestRunner:
-          default_jobs: 1
       name: '@Author::SHARYANTO/@Filter/MakeMaker'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::Manifest
       name: '@Author::SHARYANTO/@Filter/Manifest'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ConfirmRelease
       name: '@Author::SHARYANTO/@Filter/ConfirmRelease'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::UploadToCPAN
       name: '@Author::SHARYANTO/@Filter/UploadToCPAN'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::Author::SHARYANTO::MetaResources
       name: '@Author::SHARYANTO/Author::SHARYANTO::MetaResources'
@@ -105,11 +102,11 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::MetaJSON
       name: '@Author::SHARYANTO/MetaJSON'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::MetaConfig
       name: '@Author::SHARYANTO/MetaConfig'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::OurDate
       name: '@Author::SHARYANTO/OurDate'
@@ -169,7 +166,7 @@ x_Dist_Zilla:
             -
               class: Pod::Weaver::Plugin::Perinci
               name: '@Author::SHARYANTO/Perinci'
-              version: '0.14'
+              version: '0.15'
             -
               class: Pod::Weaver::Section::Leftovers
               name: '@Author::SHARYANTO/Leftovers'
@@ -211,7 +208,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::PruneFiles
       name: '@Author::SHARYANTO/PruneFiles'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::ReadmeFromPod
       name: '@Author::SHARYANTO/ReadmeFromPod'
@@ -219,7 +216,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Rinci::Validate
       name: '@Author::SHARYANTO/Rinci::Validate'
-      version: '0.12'
+      version: '0.13'
     -
       class: Dist::Zilla::Plugin::SHARYANTO::OurPkgVersion
       name: '@Author::SHARYANTO/SHARYANTO::OurPkgVersion'
@@ -246,7 +243,7 @@ x_Dist_Zilla:
           phase: test
           type: requires
       name: TestRequires
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::Prereqs
       config:
@@ -254,41 +251,41 @@ x_Dist_Zilla:
           phase: runtime
           type: requires
       name: Prereqs
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':InstallModules'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':IncModules'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':TestFiles'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ExecFiles'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':ShareFiles'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':MainModule'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':AllFiles'
-      version: '5.015'
+      version: '5.013'
     -
       class: Dist::Zilla::Plugin::FinderCode
       name: ':NoFiles'
-      version: '5.015'
+      version: '5.013'
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
       is_trial: '0'
-    version: '5.015'
+    version: '5.013'

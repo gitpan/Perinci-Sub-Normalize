@@ -16,8 +16,8 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.04'; # VERSION
-our $DATE = '2014-04-30'; # DATE
+our $VERSION = '0.05'; # VERSION
+our $DATE = '2014-05-01'; # DATE
 
 sub _normalize{
     my ($meta, $opts, $proplist, $nmeta, $prefix) = @_;
@@ -138,7 +138,7 @@ sub normalize_function_metadata {
 }
 
 1;
-# ABSTRACT: Normalize Rinci metadata
+# ABSTRACT: Normalize Rinci function metadata
 
 __END__
 
@@ -148,11 +148,11 @@ __END__
 
 =head1 NAME
 
-Perinci::Sub::Normalize - Normalize Rinci metadata
+Perinci::Sub::Normalize - Normalize Rinci function metadata
 
 =head1 VERSION
 
-This document describes version 0.04 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-04-30.
+This document describes version 0.05 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-05-01.
 
 =head1 SYNOPSIS
 
@@ -164,7 +164,7 @@ This document describes version 0.04 of Perinci::Sub::Normalize (from Perl distr
 
 =head2 normalize_function_metadata($meta, \%opts) => HASH
 
-Normalize and check Rinci function metadata C<$meta>. Return normalized
+Normalize and check L<Rinci> function metadata C<$meta>. Return normalized
 metadata, which is a shallow copy of C<$meta>. Die on error.
 
 Available options:

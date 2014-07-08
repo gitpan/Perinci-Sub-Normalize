@@ -16,8 +16,8 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.05'; # VERSION
-our $DATE = '2014-05-01'; # DATE
+our $VERSION = '0.06'; # VERSION
+our $DATE = '2014-07-08'; # DATE
 
 sub _normalize{
     my ($meta, $opts, $proplist, $nmeta, $prefix) = @_;
@@ -110,8 +110,9 @@ sub _normalize{
             }
         } else {
             if ($k eq 'schema' && $opt_nss) { # XXX currently hardcoded
-                require Data::Sah;
-                $nmeta->{$k} = Data::Sah::normalize_schema($meta->{$k});
+                require Data::Sah::Normalize;
+                $nmeta->{$k} = Data::Sah::Normalize::normalize_schema(
+                    $meta->{$k});
             } else {
                 $nmeta->{$k} = $meta->{$k};
             }
@@ -152,7 +153,7 @@ Perinci::Sub::Normalize - Normalize Rinci function metadata
 
 =head1 VERSION
 
-This document describes version 0.05 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-05-01.
+This document describes version 0.06 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-07-08.
 
 =head1 SYNOPSIS
 

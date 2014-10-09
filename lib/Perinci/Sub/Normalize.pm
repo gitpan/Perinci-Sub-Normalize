@@ -1,5 +1,8 @@
 package Perinci::Sub::Normalize;
 
+our $DATE = '2014-10-09'; # DATE
+our $VERSION = '0.07'; # VERSION
+
 use 5.010001;
 use strict;
 use warnings;
@@ -16,19 +19,22 @@ my $sch = $Sah::Schema::Rinci::SCHEMAS{rinci_function}
 my $sch_proplist = $sch->[1]{_prop}
     or die "BUG: Rinci schema structure changed (2)";
 
-our $VERSION = '0.06'; # VERSION
-our $DATE = '2014-07-08'; # DATE
-
 sub _normalize{
-    my ($meta, $opts, $proplist, $nmeta, $prefix) = @_;
+    my ($meta, $ver, $opts, $proplist, $nmeta, $prefix) = @_;
 
     my $opt_aup = $opts->{allow_unknown_properties};
     my $opt_nss = $opts->{normalize_sah_schemas};
     my $opt_rip = $opts->{remove_internal_properties};
 
+    if (defined $ver) {
+        defined($meta->{v}) && $meta->{v} eq $ver
+            or die "$prefix: Metadata version must be $ver";
+    }
+
   KEY:
     for my $k (keys %$meta) {
 
+        # strip attributes prefixed with _ (e.g. args._comment)
         if ($k =~ /\.(\w+)\z/) {
             my $attr = $1;
             unless ($attr =~ /\A_/ && $opt_rip) {
@@ -66,6 +72,7 @@ sub _normalize{
             $nmeta->{$k} = {};
             _normalize(
                 $meta->{$k},
+                $prop_proplist->{_ver},
                 $opts,
                 $prop_proplist->{_prop},
                 $nmeta->{$k},
@@ -81,6 +88,7 @@ sub _normalize{
                 if (ref($_) eq 'HASH') {
                     _normalize(
                         $_,
+                        $prop_proplist->{_ver},
                         $opts,
                         $prop_proplist->{_elem_prop},
                         $href,
@@ -102,6 +110,7 @@ sub _normalize{
                     unless ref($meta->{$k}{$_}) eq 'HASH';
                 _normalize(
                     $meta->{$k}{$_},
+                    $prop_proplist->{_ver},
                     $opts,
                     $prop_proplist->{_value_prop},
                     $nmeta->{$k}{$_},
@@ -127,15 +136,11 @@ sub normalize_function_metadata {
 
     $opts //= {};
 
-    unless (($meta->{v} // 1.0) == 1.1) {
-        die "Can only normalize Rinci 1.1 metadata";
-    }
-
     $opts->{allow_unknown_properties}    //= 0;
     $opts->{normalize_sah_schemas}       //= 1;
     $opts->{remove_internal_properties}  //= 0;
 
-    _normalize($meta, $opts, $sch_proplist, {}, '');
+    _normalize($meta, 1.1, $opts, $sch_proplist, {}, '');
 }
 
 1;
@@ -153,7 +158,7 @@ Perinci::Sub::Normalize - Normalize Rinci function metadata
 
 =head1 VERSION
 
-This document describes version 0.06 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-07-08.
+This document describes version 0.07 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-10-09.
 
 =head1 SYNOPSIS
 
@@ -200,7 +205,7 @@ Please visit the project's homepage at L<https://metacpan.org/release/Perinci-Su
 
 =head1 SOURCE
 
-Source repository is at L<https://github.com/sharyanto/perl-Perinci-Sub-Normalize>.
+Source repository is at L<https://github.com/perlancar/perl-Perinci-Sub-Normalize>.
 
 =head1 BUGS
 
@@ -212,11 +217,11 @@ feature.
 
 =head1 AUTHOR
 
-Steven Haryanto <stevenharyanto@gmail.com>
+perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by Steven Haryanto.
+This software is copyright (c) 2014 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

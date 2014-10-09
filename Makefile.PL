@@ -11,7 +11,7 @@ use ExtUtils::MakeMaker 6.30;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Normalize Rinci function metadata",
-  "AUTHOR" => "Steven Haryanto <stevenharyanto\@gmail.com>",
+  "AUTHOR" => "perlancar <perlancar\@cpan.org>",
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => "6.30"
   },
@@ -21,7 +21,7 @@ my %WriteMakefileArgs = (
   "NAME" => "Perinci::Sub::Normalize",
   "PREREQ_PM" => {
     "Data::Sah::Normalize" => 0,
-    "Rinci" => "v1.1.46",
+    "Rinci" => "v1.1.55",
     "Sah::Schema::Rinci" => "v1.1.44"
   },
   "TEST_REQUIRES" => {
@@ -31,7 +31,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.98"
   },
-  "VERSION" => "0.06",
+  "VERSION" => "0.07",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -43,7 +43,7 @@ my %FallbackPrereqs = (
   "File::Spec" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
-  "Rinci" => "v1.1.46",
+  "Rinci" => "v1.1.55",
   "Sah::Schema::Rinci" => "v1.1.44",
   "Test::Exception" => 0,
   "Test::More" => "0.98"

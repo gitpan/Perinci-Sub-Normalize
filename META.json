@@ -57,7 +57,7 @@
          "web" : "https://github.com/perlancar/perl-Perinci-Sub-Normalize"
       }
    },
-   "version" : "0.07",
+   "version" : "0.08",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018002"

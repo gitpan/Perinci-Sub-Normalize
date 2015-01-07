@@ -1,7 +1,7 @@
 package Perinci::Sub::Normalize;
 
-our $DATE = '2014-10-17'; # DATE
-our $VERSION = '0.08'; # VERSION
+our $DATE = '2015-01-07'; # DATE
+our $VERSION = '0.09'; # VERSION
 
 use 5.010001;
 use strict;
@@ -60,7 +60,7 @@ sub _normalize{
                 # hide technical error message from require()
                 if ($@) {
                     die "Unknown property '$prefix/$prop' (and couldn't ".
-                        "load property module '$mod')" if $@;
+                        "load property module '$mod'): $@" if $@;
                 }
                 $prop_proplist = $proplist->{$prop};
             }
@@ -160,7 +160,7 @@ Perinci::Sub::Normalize - Normalize Rinci function metadata
 
 =head1 VERSION
 
-This document describes version 0.08 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2014-10-17.
+This document describes version 0.09 of Perinci::Sub::Normalize (from Perl distribution Perinci-Sub-Normalize), released on 2015-01-07.
 
 =head1 SYNOPSIS
 
@@ -223,7 +223,7 @@ perlancar <perlancar@cpan.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2014 by perlancar@cpan.org.
+This software is copyright (c) 2015 by perlancar@cpan.org.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
